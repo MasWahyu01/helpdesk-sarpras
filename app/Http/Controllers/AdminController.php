@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Ticket; // Jangan lupa import Model Ticket
+use App\Models\Ticket; 
 
 class AdminController extends Controller
 {
@@ -17,7 +17,6 @@ class AdminController extends Controller
 
         return view('admin.dashboard', compact('totalTickets', 'pendingTickets', 'processTickets', 'doneTickets'));
     }
-    // ... method index biarkan di atas ...
 
     public function tickets()
     {
@@ -31,5 +30,26 @@ class AdminController extends Controller
     {
         // Menampilkan halaman detail tiket
         return view('admin.tickets.show', compact('ticket'));
+    }
+
+    /**
+     * Update status tiket dan respon admin.
+     */
+    public function update(Request $request, Ticket $ticket)
+    {
+        // Validasi input
+        $request->validate([
+            'status' => 'required|in:pending,proses,selesai',
+            'admin_response' => 'nullable|string'
+        ]);
+
+        // Update data tiket di database
+        $ticket->update([
+            'status' => $request->status,
+            'admin_response' => $request->admin_response
+        ]);
+
+        // Redirect kembali ke halaman daftar tiket dengan pesan sukses
+        return redirect()->route('admin.tickets.index')->with('success', 'Status tiket berhasil diperbarui!');
     }
 }
