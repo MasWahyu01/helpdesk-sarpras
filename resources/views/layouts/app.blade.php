@@ -30,7 +30,29 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-
+                        @auth
+                            @if(auth()->user()->role == 'admin')
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Kelola User</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Kategori</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Laporan Masuk</a>
+                                </li>
+                            @else
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('student.dashboard') }}">Dashboard Saya</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Buat Laporan Baru</a>
+                                </li>
+                            @endif
+                        @endauth
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -57,7 +79,7 @@
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                                     document.getElementById('logout-form').submit();"> 
                                         {{ __('Logout') }}
                                     </a>
 
