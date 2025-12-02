@@ -6,7 +6,7 @@
             <div class="col-md-10">
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <h2>Laporan Saya</h2>
-                    <a href="#" class="btn btn-primary">Buat Laporan Baru</a>
+                    <a href="{{ route('student.tickets.create') }}" class="btn btn-primary">Buat Laporan Baru</a>
                 </div>
 
                 <div class="card">

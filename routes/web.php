@@ -31,4 +31,6 @@ Route::middleware(['auth', 'is_admin'])->group(function () {
 // Route untuk Siswa (Diproteksi oleh middleware 'auth' saja)
 Route::middleware(['auth'])->group(function () {
     Route::get('/student/dashboard', [StudentController::class, 'index'])->name('student.dashboard');
+    Route::get('/student/tickets/create', [StudentController::class, 'create'])->name('student.tickets.create');
+    Route::post('/student/tickets', [StudentController::class, 'store'])->name('student.tickets.store');
 });
