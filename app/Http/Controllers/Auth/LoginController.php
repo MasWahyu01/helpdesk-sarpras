@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth; // Tambahkan ini jika belum ada (walaupun Auth::user() bekerja tanpa ini di Laravel 8+)
 
 class LoginController extends Controller
 {
@@ -25,7 +26,19 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    // protected $redirectTo = '/home'; // Properti ini dihapus atau dikomentari
+
+    // Ganti redirect berdasarkan role
+    protected function redirectTo()
+    {
+        // Pastikan pengguna sudah terautentikasi sebelum mencoba mengakses 'role'
+        if (Auth::check() && auth()->user()->role == 'admin') {
+            return route('admin.dashboard');
+        }
+        
+        // Default redirect untuk siswa atau role lainnya
+        return route('student.dashboard');
+    }
 
     /**
      * Create a new controller instance.
