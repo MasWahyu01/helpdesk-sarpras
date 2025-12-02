@@ -26,6 +26,15 @@ Auth::routes();
 // Route untuk Admin (Diproteksi oleh middleware 'auth' dan 'is_admin')
 Route::middleware(['auth', 'is_admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::middleware(['auth', 'is_admin'])->group(function () {
+    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    
+    // TAMBAHKAN INI:
+    // Route untuk melihat daftar tiket
+    Route::get('/admin/tickets', [AdminController::class, 'tickets'])->name('admin.tickets.index');
+    // Route untuk melihat detail tiket spesifik
+    Route::get('/admin/tickets/{ticket}', [AdminController::class, 'show'])->name('admin.tickets.show');
+    });
 });
 
 // Route untuk Siswa (Diproteksi oleh middleware 'auth' saja)
