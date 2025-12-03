@@ -35,7 +35,8 @@
                                                 </span>
                                             </td>
                                             <td>
-                                                <a href="#" class="btn btn-sm btn-info text-white">Detail</a>
+                                                <a href="{{ route('student.tickets.show', $ticket) }}"
+                                                    class="btn btn-sm btn-info text-white">Detail</a>
                                             </td>
                                         </tr>
                                     @endforeach

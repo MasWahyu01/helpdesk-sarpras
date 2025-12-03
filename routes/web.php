@@ -38,4 +38,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/student/dashboard', [StudentController::class, 'index'])->name('student.dashboard');
     Route::get('/student/tickets/create', [StudentController::class, 'create'])->name('student.tickets.create');
     Route::post('/student/tickets', [StudentController::class, 'store'])->name('student.tickets.store');
+    Route::get('/student/tickets/{ticket}', [StudentController::class, 'show'])->name('student.tickets.show');
 });

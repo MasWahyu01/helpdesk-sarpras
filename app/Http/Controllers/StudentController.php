@@ -60,4 +60,13 @@ class StudentController extends Controller
 
         return redirect()->route('student.dashboard')->with('success', 'Laporan berhasil dikirim!');
     }
+    public function show(Ticket $ticket)
+    {
+        // KEAMANAN: Cek apakah tiket ini milik siswa yang sedang login?
+        if ($ticket->user_id != auth()->id()) {
+            abort(403, 'Anda tidak berhak mengakses laporan ini.');
+        }
+
+        return view('student.show', compact('ticket'));
+    }
 }
